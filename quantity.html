@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Average</title>
+    <style>
+        * {
+            font-size:40px;
+        }
+    </style>
+</head>
+<body>
+    <input id="S1-input" type="text"/>
+    <input id="S2-input" type="text"/>
+    <input id="S3-input" type="text"/>
+    <button id="average-button">Calculate Average</button>
+    <p id="sales_average"></p>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $("#average-button").click(function(event){
+            let message = {
+                S1: $("#S1-input").val()
+                S2: $("#S2-input").val()
+                S3: $("#S3-input").val()
+            }
+            $.post("http://10.1.2.147:5000/keras_sales_average_test.py", JSON.stringify(message), function(response){
+                $("#sales_average").text(response.sales_average);
+                console.log(response);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>deeplizard greeting app</title>
+    <style>
+        * {
+            font-size:30px;
+        }
+    </style>
+</head>
+<body>
+    <input id="name-input" type="text"/>
+    <button id="name-button">Submit Name</button>
+    <p id="greeting"></p> <!--For area on the screen the greeting will be displayed-->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> <!--points to a webserver we are importing jquery from-->
+    <script>
+        $("#name-button").click(function(event){ //refers to element with the id name-button. When a click event occurs
+            let message = {
+                name: $("#name-input").val()
+            }
+            $.post("http://10.1.2.147:5000/hello", JSON.stringify(message), function(response){
+                $("#greeting").text(response.greeting); //connects to the specified json data in the hello.app.py python file
+                console.log(response);
+            });
+        });
+    </script>
+</body>
+</html>
